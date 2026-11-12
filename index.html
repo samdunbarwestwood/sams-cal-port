@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sam Dunbar Westwood — Portfolio for CalMac</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F5F1; --surface:#FFFFFF; --ink:#121417; --ink-2:#4A4F57; --ink-3:#6B717A;
+    --line:#E3E1DA; --sea:#0E3B5C; --sea-soft:#E3ECF2; --accent:#E2483D; --max:1180px; --read:760px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-padding-top:88px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  body{font-family:"Inter Tight",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-style:italic;letter-spacing:0}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  .skip{position:absolute;left:-999px;top:12px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;z-index:100}
+  .skip:focus{left:12px}
+  :focus-visible{outline:3px solid var(--sea);outline-offset:3px;border-radius:8px}
+  [hidden]{display:none!important}
+  h1[tabindex="-1"]:focus{outline:none}
+
+
+  /* Soft colour glow, top right */
+  .glow{position:absolute;top:0;left:0;right:0;height:800px;pointer-events:none;z-index:0;overflow:hidden}
+  @media (max-width:560px){.glow i{transform:scale(.6);transform-origin:top right}}
+  .glow i{position:absolute;border-radius:50%;filter:blur(90px)}
+  .glow .g1{width:420px;height:420px;right:-120px;top:-180px;background:#e90521;opacity:.10}
+  .glow .g3{width:380px;height:320px;right:120px;top:-40px;background:#FFD618;opacity:.13}
+  main{position:relative;z-index:1}
+
+  /* Nav */
+  header{position:sticky;top:0;z-index:50;background:rgba(246,245,241,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+  header.scrolled{border-bottom-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-weight:600;text-decoration:none;font-size:17px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .logo-mark{width:35px;height:35px;border-radius:50%;object-fit:cover;background:#E3ECF2;flex:none}
+  nav ul{display:flex;gap:6px;list-style:none}
+  nav a{text-decoration:none;font-size:15px;font-weight:500;padding:8px 14px;border-radius:999px;color:var(--ink-2);transition:background .15s,color .15s}
+  nav a:hover{background:#ECEAE3;color:var(--ink)}
+  nav a.active{background:var(--ink);color:#fff}
+
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center;padding:64px 0 120px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--sea);background:var(--sea-soft);padding:6px 14px 6px 10px;border-radius:999px;margin-bottom:28px}
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  h1{font-size:clamp(42px,6vw,72px);line-height:1.02;letter-spacing:-.035em;font-weight:600;margin-bottom:28px}
+  h1 .serif{font-size:1.08em}
+  .lede{font-size:20px;line-height:1.55;color:var(--ink-2);max-width:560px;margin-bottom:18px}
+  .lede strong{color:var(--ink);font-weight:600}
+  .personal{font-size:18px;line-height:1.55;color:var(--ink);max-width:560px;margin:26px 0 0;padding-left:20px;border-left:3px solid var(--accent)}
+  .built{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;max-width:560px;margin:28px 0 32px;font-size:15px;color:var(--ink-2);line-height:1.5}
+  .built svg{flex:none;margin-top:2px}
+  .built b{color:var(--ink);font-weight:600}
+  .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:500;font-size:16px;padding:14px 22px;border-radius:999px;transition:transform .15s,background .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{background:#2A2E34}
+  .btn-ghost{border:1px solid #CFCCC3;color:var(--ink)}
+  .btn-ghost:hover{background:#ECEAE3}
+  .photo{position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;background:#C3D3DD}
+  .photo img{width:100%;height:100%;object-fit:cover;object-position:30% center}
+  .photo-tag{position:absolute;left:16px;bottom:16px;right:16px;max-width:300px;background:rgba(255,255,255,.94);border-radius:14px;padding:10px 14px;font-size:13px;line-height:1.35;display:flex;gap:10px;align-items:center}
+  .photo-tag .live{flex:none;width:8px;height:8px;border-radius:50%;background:#2BA866;box-shadow:0 0 0 4px rgba(43,168,102,.18)}
+
+  /* Fit strip */
+  .fit{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:112px}
+  .fit div{padding:28px 24px 28px 0}
+  .fit div+div{padding-left:24px;border-left:1px solid var(--line)}
+  .fit .n{font-size:36px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-bottom:10px}
+  .fit p{font-size:15px;color:var(--ink-2);line-height:1.45}
+
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px}
+  .label{font-size:13px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:12px}
+  h2{font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.03em;font-weight:600}
+  .sec-head p{max-width:380px;color:var(--ink-2);font-size:16px}
+
+  /* Case cards */
+  .cases{display:grid;gap:24px;margin-bottom:128px}
+  .case{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;text-decoration:none;transition:transform .25s,box-shadow .25s}
+  a.case:hover{transform:translateY(-3px);box-shadow:0 24px 48px -24px rgba(18,20,23,.22)}
+  a.case:hover .arrow{background:var(--ink);color:#fff;transform:rotate(-45deg)}
+  a.case:hover .thumb img{transform:scale(1.03)}
+  .case-body{padding:44px;display:flex;flex-direction:column}
+  .case-num{font-size:14px;color:var(--ink-3);font-weight:500;margin-bottom:20px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .tag{font-size:13px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--bg)}
+  .tag.hot{background:var(--ink);border-color:var(--ink);color:#fff}
+  .case h3{font-size:34px;letter-spacing:-.025em;line-height:1.1;font-weight:600;margin-bottom:14px}
+  .case p{color:var(--ink-2);font-size:16px;margin-bottom:28px;max-width:440px}
+  .meta{display:flex;gap:28px;margin-top:auto;padding-top:24px;border-top:1px solid var(--line);align-items:flex-end}
+  .meta dt{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+  .meta dd{font-size:15px;font-weight:500}
+  .arrow{margin-left:auto;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:all .25s;flex:none}
+  .thumb{position:relative;min-height:400px;overflow:hidden;display:flex;align-items:center;justify-content:flex-end;padding:40px 0 40px 40px}
+  .thumb img{width:120%;max-width:none;border-radius:12px 0 0 12px;box-shadow:0 20px 50px -20px rgba(0,0,0,.35);transition:transform .4s}
+  .thumb.sd{background:linear-gradient(150deg,#1F6FD1,#0F4EA0)}
+  .thumb.un{background:linear-gradient(150deg,#22262C,#121417)}
+  .case.soon{border-style:dashed;background:transparent}
+  .case.soon .thumb{background:repeating-linear-gradient(-45deg,#EFEDE7 0 12px,#F6F5F1 12px 24px);justify-content:center;padding:0}
+  .soon-pill{background:var(--surface);border:1px solid var(--line);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+
+  /* Contact */
+  .contact{background:var(--ink);color:#fff;border-radius:32px;padding:72px 64px;margin-bottom:40px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end}
+  .contact .label{color:#9AA0A8}
+  .contact h2 .serif{color:#FFD618}
+  .contact p{color:#C4C8CE;margin-top:18px;max-width:440px}
+  .links{display:grid;gap:10px}
+  .links a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:#1D2025;text-decoration:none;font-size:16px;transition:background .15s;word-break:break-word}
+  .links a:hover{background:#2A2E34}
+  .links small{color:#9AA0A8;font-size:13px;display:block}
+  footer{padding:24px 0 48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink-3)}
+
+  /* ===== Case study pages ===== */
+  .cs-top{padding:40px 0 48px}
+  .back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:15px;font-weight:500;color:var(--ink-2);margin-bottom:40px;padding:8px 14px 8px 10px;border-radius:999px;border:1px solid var(--line)}
+  .back:hover{background:#ECEAE3;color:var(--ink)}
+  .cs-top h1{font-size:clamp(38px,5.4vw,64px);max-width:920px;margin-bottom:24px}
+  .cs-intro{font-size:21px;line-height:1.55;color:var(--ink-2);max-width:760px}
+  .cs-meta{display:grid;grid-template-columns:repeat(4,1fr);margin-top:48px;border-top:1px solid var(--line)}
+  .cs-meta div{padding:20px 20px 0 0}
+  .cs-meta dt{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .cs-meta dd{font-size:15px;font-weight:500;line-height:1.45}
+  .cs-hero{border-radius:28px;padding:56px 56px 0;overflow:hidden;margin-bottom:96px}
+  .cs-hero img{border-radius:14px 14px 0 0;box-shadow:0 -10px 60px -20px rgba(0,0,0,.4);margin:0 auto;cursor:zoom-in}
+  .cs-hero.sd{background:linear-gradient(150deg,#1F6FD1,#0F4EA0)}
+  .cs-hero.un{background:linear-gradient(150deg,#2A2F36,#121417)}
+
+  .cs-section{display:grid;grid-template-columns:240px 1fr;gap:48px;margin-bottom:96px}
+  .cs-section > .side{position:sticky;top:104px;align-self:start}
+  .cs-section .step{font-size:13px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.09em}
+  .cs-section .side h2{font-size:28px;letter-spacing:-.02em;margin-top:8px}
+  .prose{max-width:var(--read)}
+  .prose p{font-size:18px;color:var(--ink-2);margin-bottom:18px}
+  .prose p strong{color:var(--ink);font-weight:600}
+  .prose h3{font-size:22px;letter-spacing:-.015em;margin:40px 0 12px}
+  .prose h3:first-child{margin-top:0}
+  .prose ul{margin:0 0 18px 0;list-style:none}
+  .prose li{position:relative;padding-left:26px;margin-bottom:10px;font-size:17px;color:var(--ink-2)}
+  .prose li::before{content:"";position:absolute;left:4px;top:11px;width:8px;height:8px;border-radius:50%;background:var(--sea)}
+  .pull{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:30px;line-height:1.25;color:var(--ink);border-left:3px solid var(--accent);padding-left:24px;margin:32px 0}
+
+  .shot{margin:32px 0 8px}
+  .shot .frame{background:#ECEAE3;border-radius:20px;padding:28px;overflow:hidden}
+  .shot .frame.dark{background:#1B1E23}
+  .shot img{border-radius:10px;margin:0 auto;box-shadow:0 12px 40px -18px rgba(0,0,0,.35);cursor:zoom-in}
+  .shot figcaption{font-size:14px;color:var(--ink-3);margin-top:12px;line-height:1.5}
+  .shot figcaption b{color:var(--ink-2);font-weight:600}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .pair .shot{margin-top:0}
+
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+  .cards2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px}
+  .card .ic{width:40px;height:40px;border-radius:12px;background:var(--sea-soft);color:var(--sea);display:grid;place-items:center;font-weight:600;margin-bottom:16px}
+  .card h4{font-size:18px;letter-spacing:-.01em;margin-bottom:8px;line-height:1.3}
+  .card p{font-size:15px;color:var(--ink-2);margin:0;line-height:1.5}
+  .persona .who{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+  .avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:600;color:#fff;flex:none}
+  .persona .who b{display:block;font-size:17px}
+  .persona .who span{font-size:13px;color:var(--ink-3)}
+  .persona dl dt{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:14px 0 4px}
+  .persona dl dd{font-size:14px;color:var(--ink-2);line-height:1.5}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0}
+  .stats.three{grid-template-columns:repeat(3,1fr)}
+  .stats.two{grid-template-columns:repeat(2,1fr)}
+  .stat{background:var(--ink);color:#fff;border-radius:20px;padding:28px 24px}
+  .stat .n{font-size:44px;font-weight:600;letter-spacing:-.035em;line-height:1;margin-bottom:12px}
+  .stat p{font-size:14px;color:#C4C8CE;line-height:1.45;margin:0}
+  .stat.light{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+  .stat.light p{color:var(--ink-2)}
+
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+  .quote{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:21px;line-height:1.3}
+  .quote small{display:block;font-family:"Inter Tight",sans-serif;font-style:normal;font-size:13px;color:var(--ink-3);margin-top:14px}
+
+  .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0;counter-reset:f}
+  .flow .card{position:relative}
+  .flow .card .ic{background:var(--ink);color:#fff;border-radius:50%}
+
+  .calmac{background:var(--sea);color:#fff;border-radius:24px;padding:36px 40px;margin:0 0 96px;display:grid;grid-template-columns:240px 1fr;gap:48px}
+  .calmac .label{color:#9CC0DA;margin:0}
+  .calmac h3{font-size:24px;letter-spacing:-.015em;line-height:1.25;margin-bottom:10px}
+  .calmac p{color:#D5E3EE;font-size:16px;max-width:var(--read)}
+
+  .next{display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:1px solid var(--line);padding:40px 0 24px;text-decoration:none;margin-bottom:40px}
+  .next small{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);font-weight:600;margin-bottom:6px}
+  .next b{font-size:clamp(28px,4vw,44px);letter-spacing:-.03em;font-weight:600}
+  .next:hover .arrow{background:var(--ink);color:#fff}
+
+  .thumb.stv{background:linear-gradient(150deg,#2B1B4F,#0D0A1A)}
+  .cs-hero.stv{background:linear-gradient(150deg,#3A2470,#0D0A1A)}
+  .placeholder{border:2px dashed #CFCCC3;border-radius:20px;padding:40px 28px;text-align:center;color:var(--ink-3);font-size:15px;line-height:1.5;margin:32px 0 8px;background:repeating-linear-gradient(-45deg,#EFEDE7 0 12px,#F6F5F1 12px 24px)}
+  .placeholder b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+  .cs-hero .placeholder{margin:0 0 56px;border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);color:#C9C2E0}
+  .cs-hero .placeholder b{color:#fff}
+  .hyp{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;margin:16px 0}
+  .hyp .q{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:24px;line-height:1.3;margin-bottom:20px}
+  .hyp .k{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);margin-bottom:8px}
+  .ba{display:grid;grid-template-columns:72px 1fr 60px;gap:10px 14px;align-items:center;font-size:14px}
+  .ba .bar{height:14px;border-radius:999px;background:#ECEAE3;overflow:hidden}
+  .ba .bar i{display:block;height:100%;border-radius:999px}
+  .ba .before i{background:#B9B6AD}
+  .ba .after i{background:var(--sea)}
+  .ba .v{font-weight:600;text-align:right}
+  .hyp .res{margin-top:18px;font-size:16px;color:var(--ink-2)}
+  .hyp .res b{color:var(--ink)}
+
+  .tryit{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--sea-soft);border-radius:20px;padding:24px 28px;margin:20px 0 8px}
+  .tryit p{margin:0!important;color:var(--sea)!important;font-size:17px!important;max-width:440px}
+  /* Lightbox */
+  .lb{position:fixed;inset:0;background:rgba(10,12,14,.9);z-index:200;display:flex;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
+  .lb img{max-width:100%;max-height:100%;border-radius:10px}
+  .lb button{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;font-size:20px;cursor:pointer}
+
+  /* Responsive */
+  @media (max-width:960px){
+    .hero{grid-template-columns:1fr;gap:40px;padding:40px 0 72px}
+    .photo{max-width:480px;aspect-ratio:4/3}
+    .fit{grid-template-columns:1fr 1fr}
+    .fit div:nth-child(3){padding-left:0;border-left:0}
+    .fit div:nth-child(n+3){border-top:1px solid var(--line)}
+    .case{grid-template-columns:1fr}
+    .thumb{min-height:240px;order:-1;padding:32px 0 0 32px;align-items:flex-end}
+    .thumb img{border-radius:12px 0 0 0}
+    .case-body{padding:32px}
+    .contact{grid-template-columns:1fr;padding:48px 32px}
+    .sec-head{flex-direction:column;align-items:flex-start}
+    .cs-section,.calmac{grid-template-columns:1fr;gap:20px}
+    .cs-section > .side{position:static}
+    .cs-meta{grid-template-columns:1fr 1fr}
+    .cs-hero{padding:28px 28px 0}
+    .cards3,.quotes,.flow{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px}
+    nav a{padding:8px 10px;font-size:14px}
+    .logo-name{display:none}
+    .fit{grid-template-columns:1fr}
+    .fit div,.fit div+div{padding:20px 0;border-left:0}
+    .fit div+div{border-top:1px solid var(--line)}
+    .case h3{font-size:28px}
+    .meta{gap:18px;flex-wrap:wrap}
+    .pair,.cards2,.stats.three{grid-template-columns:1fr}
+    .shot .frame{padding:14px}
+    .stat .n{font-size:36px}
+    .calmac{padding:28px 24px}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="glow" aria-hidden="true"><i class="g1"></i><i class="g3"></i></div>
+
+<header id="top-bar">
+  <div class="wrap nav">
+    <a href="#home" class="logo" aria-label="Sam Dunbar Westwood, home"><img class="logo-mark" src="img/sam.jpg" alt="" width="35" height="35"><span class="logo-name">Sam Dunbar Westwood</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#home" data-nav="home">Home</a></li>
+        <li><a href="#case-studies" data-nav="case-studies">Case studies</a></li>
+        <li><a href="#contact" data-nav="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HOME VIEW ================= -->
+<div id="view-home" class="wrap">
+
+  <section id="home" class="hero" aria-labelledby="hero-title">
+    <div>
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>For the UX/UI Lead role at CalMac</span>
+      <h1 id="hero-title"><span lang="gd">Fàilte air bòrd</span>, <span class="serif" style="color:#e90521">CalMac.</span></h1>
+      <p class="lede">I'm Sam, a <strong>Lead Product Designer with 12+ years</strong> using research and data to turn complex problems into clear, accessible products. As a weekly user of CalMac, I'm excited to chat with you and see if this is a great fit.</p>
+      <p class="lede">I lead design and research across web, iOS/Android and TV at STV. My work runs from large discovery research and data analysis, through to Figma/Claude prototyping and crafting detailed design systems. I also regularly present to stakeholders and push our growing design culture.</p>
+      <div class="built">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E3B5C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+        <span><b>This portfolio was built in a day, just for CalMac.</b> I've quickly pulled together a mix of design and research case studies. Have a nosey through, and let me know if you fancy a call to really dig into the details.</span>
+      </div>
+      <div class="ctas">
+        <a href="#case-studies" class="btn btn-primary">View case studies
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="img/ferry.jpg" alt="Passengers in red seats inside a ferry lounge, looking out at another ferry crossing the sea at golden hour">
+      <figcaption class="photo-tag"><span class="live" aria-hidden="true"></span><span><b>Based on the Isle of Arran</b><br>Currently in Glasgow 1–2 days a week</span></figcaption>
+    </figure>
+  </section>
+
+  <section id="case-studies" aria-labelledby="cs-title">
+    <div class="sec-head">
+      <div>
+        <div class="label">Selected work</div>
+        <h2 id="cs-title">Three case <span class="serif">studies</span></h2>
+      </div>
+      <p>Each one shows a different side of the job: finding out what users need, designing a way through complexity, and shipping it.</p>
+    </div>
+
+    <div class="cases">
+      <a class="case" href="#sumdog">
+        <div class="case-body">
+          <div class="case-num">01</div>
+          <div class="tags"><span class="tag hot">Research intensive</span><span class="tag">UX design</span></div>
+          <h3>Sumdog</h3>
+          <p>Turning a chaotic teacher dashboard into something new teachers could pick up on day one, built on a research programme I set up from scratch.</p>
+          <dl class="meta">
+            <div><dt>Role</dt><dd>Product Designer</dd></div>
+            <div><dt>Result</dt><dd>+25% teachers</dd></div>
+            <span class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </dl>
+        </div>
+        <div class="thumb sd" aria-hidden="true"><img src="img/52.jpg" alt=""></div>
+      </a>
+
+      <a class="case" href="#unity">
+        <div class="case-body">
+          <div class="case-num">02</div>
+          <div class="tags"><span class="tag hot">Complex design problem</span></div>
+          <h3>Unity</h3>
+          <p>Rebuilding A/B testing for Unity Gaming Services so game teams could set up experiments with confidence and trust what the results told them.</p>
+          <dl class="meta">
+            <div><dt>Role</dt><dd>Lead Product Designer</dd></div>
+            <div><dt>Result</dt><dd>6% → 55% tests live</dd></div>
+            <span class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </dl>
+        </div>
+        <div class="thumb un" aria-hidden="true"><img src="img/86.jpg" alt=""></div>
+      </a>
+
+      <a class="case" href="#stv">
+        <div class="case-body">
+          <div class="case-num">03</div>
+          <div class="tags"><span class="tag hot">Design &amp; research heavy</span></div>
+          <h3>STV Player</h3>
+          <p>Research with 200+ viewers, a redesigned live TV experience across web, mobile and TV, tested at every step, then measured against clear hypotheses.</p>
+          <dl class="meta">
+            <div><dt>Role</dt><dd>Lead Product Designer</dd></div>
+            <div><dt>Result</dt><dd>Guide bounce 86% → 55%</dd></div>
+            <span class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </dl>
+        </div>
+        <div class="thumb stv" aria-hidden="true"><img src="img/stv-hero.jpg" alt=""></div>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="contact-title">
+    <div>
+      <div class="label">Contact</div>
+      <h2 id="contact-title">Let's talk about <span class="serif">what's next.</span></h2>
+      <p>I'd love to chat about the role and how I could help CalMac build services that work for every passenger, from booking a crossing to stepping on board.</p>
+    </div>
+    <div class="links">
+      <a href="mailto:samdunbarwestwood@gmail.com"><span><small>Email</small>samdunbarwestwood@gmail.com</span><span aria-hidden="true">→</span></a>
+      <a href="https://www.linkedin.com/in/samdunbarwestwood/"><span><small>LinkedIn</small>linkedin.com/in/samdunbarwestwood</span><span aria-hidden="true">↗</span></a>
+      <a href="tel:+447791029083"><span><small>Phone</small>+44 7791 029083</span><span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SUMDOG ================= -->
+<article id="view-sumdog" class="wrap" hidden aria-labelledby="sd-title">
+  <div class="cs-top">
+    <a href="#case-studies" class="back"><span aria-hidden="true">←</span> All case studies</a>
+    <div class="tags"><span class="tag hot">Research intensive</span><span class="tag">UX design</span></div>
+    <h1 id="sd-title">Sumdog: making a chaotic teacher dashboard easy to <span class="serif">learn</span></h1>
+    <p class="cs-intro">Sumdog's teachers loved what the product did for their pupils but struggled to use it themselves. As the company's first UX designer, I set up its research from scratch and used it to rebuild onboarding, the dashboard and the tools teachers use every day.</p>
+    <p class="cs-intro" style="margin-top:16px"><strong style="color:var(--ink)">The UI in this project is a little dated now, but the research and UX involved are still very interesting (hopefully).</strong></p>
+    <dl class="cs-meta">
+      <div><dt>Role</dt><dd>Product Designer (design lead, mentoring a junior designer)</dd></div>
+      <div><dt>Team</dt><dd>Two dev teams, reporting to the CEO and Head of Product</dd></div>
+      <div><dt>Timeline</dt><dd>2017–2019</dd></div>
+      <div><dt>Tools</dt><dd>Adobe XD, workshops, interviews, card sorting, tree testing</dd></div>
+    </dl>
+  </div>
+
+  <div class="cs-hero sd"><img src="img/52.jpg" alt="Redesigned Sumdog teacher dashboard showing a class report, time spent learning this week, top learners and quick controls"></div>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">01 · Background</div><h2>The context</h2></div>
+    <div class="prose">
+      <p>Sumdog is an educational games studio helping children enjoy maths and spelling. Millions of children use it, across around <strong>50,000 classrooms</strong>, answering more than <strong>3.5 billion questions a year</strong>.</p>
+      <p>When I joined, I was the first UX designer. There was very little understanding of who the users were, what they needed or how well the product was working for them. What there was, though, was <strong>a lot of feedback from teachers</strong> about how hard the product was to use, and those frustrations were costing the business customers.</p>
+      <figure class="shot">
+        <div class="frame dark"><img src="img/42.jpg" alt="The original Sumdog teacher dashboard: brightly coloured tiles, a grid of report cards and a child's handwritten sticky note"></div>
+        <figcaption><b>Where we started.</b> Every feature stacked onto one homepage, with no information architecture behind it.</figcaption>
+      </figure>
+      <h3>Goals</h3>
+      <p>The goals shifted as the research came in, but the core of it was to:</p>
+      <ul>
+        <li>Discover the key challenges teachers were facing</li>
+        <li>Find the needs we weren't catering for</li>
+        <li>Build a reliable way to gather user feedback, permanently</li>
+        <li>Act on what we learned</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">02 · Process</div><h2>Building research from nothing</h2></div>
+    <div class="prose">
+      <p>The only ways to hear from users were cold calls and school visits. So I built a proper research setup:</p>
+      <ul>
+        <li>A <strong>panel of 100+ teachers and parents</strong>, incentivised to give us feedback at least once a month</li>
+        <li>A shared <strong>feedback database</strong> that customer service and sales could add to, so every customer quote ended up in one place</li>
+        <li><strong>Three months of user interviews</strong>, compiled and categorised into personas and user journeys</li>
+        <li>New <strong>data funnels</strong> for onboarding and usage, so we could track patterns rather than guess</li>
+      </ul>
+      <h3>Who we were designing for</h3>
+      <p>Three teacher personas came out of the research, from someone who barely knew the product to a power user running it for the whole school.</p>
+      <div class="cards3">
+        <div class="card persona">
+          <div class="who"><span class="avatar" style="background:#E2483D" aria-hidden="true">J</span><div><b>Jamie</b><span>Casual user</span></div></div>
+          <dl><dt>About</dt><dd>New teacher, not entirely sure what "Some dog?" is. Uses it on Fridays as a reward.</dd>
+          <dt>Pain points</dt><dd>Some kids can't log in and get upset. Updates stall play time.</dd></dl>
+        </div>
+        <div class="card persona">
+          <div class="who"><span class="avatar" style="background:#1F8A70" aria-hidden="true">K</span><div><b>Kevin</b><span>Regular user</span></div></div>
+          <dl><dt>About</dt><dd>Used Sumdog for about a year to practise core maths. Loves the engagement it brings.</dd>
+          <dt>Pain points</dt><dd>Unintuitive to learn, takes too long to find useful information, kids aren't rewarded for learning.</dd></dl>
+        </div>
+        <div class="card persona">
+          <div class="who"><span class="avatar" style="background:#7A4FC9" aria-hidden="true">S</span><div><b>Sonam</b><span>Power user</span></div></div>
+          <dl><dt>About</dt><dd>Sumdog champion who has built it into the curriculum and sets up classes for other teachers.</dd>
+          <dt>Pain points</dt><dd>Reporting takes ages and needs external tools. She spends a lot of time acting as admin for the school.</dd></dl>
+        </div>
+      </div>
+      <h3>The biggest problem areas</h3>
+      <div class="cards3">
+        <div class="card"><div class="ic" aria-hidden="true">1</div><h4>First-time experience</h4><p>A poor onboarding left users lost, creating duplicate schools and never seeing the product's value.</p></div>
+        <div class="card"><div class="ic" aria-hidden="true">2</div><h4>Learnability</h4><p>No information architecture and an overwhelming homepage. Teachers were running training sessions in their spare time.</p></div>
+        <div class="card"><div class="ic" aria-hidden="true">3</div><h4>Classroom control</h4><p>Teachers couldn't tell what the kids were up to. Were they learning, or just having fun?</p></div>
+      </div>
+      <h3>How we worked</h3>
+      <p>The dev teams followed Agile, so I matched it with a <strong>Lean UX</strong> loop of think, make and check. We built prototypes quickly and tested them with real users every week.</p>
+      <figure class="shot">
+        <div class="frame"><img src="img/79.jpg" alt="A workshop with teachers around a table, alongside an early wireframe of new classroom controls"></div>
+        <figcaption><b>Workshops and weekly testing.</b> Running sessions with teachers alongside early prototypes of classroom controls.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">03 · Solution</div><h2>What we changed</h2></div>
+    <div class="prose">
+      <h3>A first-time experience that works</h3>
+      <p>Walking through the whole onboarding flow showed where it broke down:</p>
+      <ul>
+        <li>Spreadsheet uploads failed, so teachers were typing in students by hand, sometimes <strong>1,000+ of them</strong></li>
+        <li>Several "schools" were being created for one real school, splitting classes apart</li>
+        <li>Children who couldn't read yet were being asked to enter passwords</li>
+      </ul>
+      <p>The new flow offers a recommended quick setup, matches new students to existing accounts so progress isn't lost, and stops duplicate schools by asking new teachers to join their existing one.</p>
+      <figure class="shot">
+        <div class="frame"><img src="img/50.jpg" alt="New onboarding step for matching new students to existing accounts, with a progress tracker on the left"></div>
+        <figcaption><b>Guided setup.</b> A clear progress tracker, plus matching students to existing accounts.</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="frame"><img src="img/27.jpg" alt="Three onboarding screens: choosing quick or advanced setup, reviewing class changes, and a prompt to join an existing school"></div>
+        <figcaption><b>Fewer decisions up front.</b> Quick setup is recommended, changes are reviewed before saving, and new teachers are asked to join their existing school.</figcaption>
+      </figure>
+
+      <h3>A dashboard teachers can learn</h3>
+      <p>Honestly, the old dashboard was horrible. I gathered every feature into clear areas, ran <strong>card sorting</strong> and then <strong>tree testing</strong> on the navigation, then redesigned the visuals. The new homepage puts the class report, competitions and classroom controls front and centre.</p>
+      <div class="pair">
+        <figure class="shot">
+          <div class="frame"><img src="img/54.jpg" alt="Quick-test setup and a colour-coded heatmap of class performance on times tables"></div>
+          <figcaption><b>Improved quick tests.</b> Teachers can see at a glance where each pupil needs help.</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img src="img/84.jpg" alt="Chart of top learners split by time in school and at home, next to printable student login cards"></div>
+          <figcaption><b>Progress at home.</b> Learning time split between school and home, plus printable login cards for young children.</figcaption>
+        </figure>
+      </div>
+      <figure class="shot">
+        <div class="frame"><img src="img/sumdog-home.jpg" alt="Redesigned Sumdog marketing homepage with clear calls to action for teachers and parents"></div>
+        <figcaption><b>New homepage.</b> A clearer first impression for teachers and parents finding Sumdog for the first time.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">04 · Impact</div><h2>The results</h2></div>
+    <div class="prose">
+      <div class="stats three">
+        <div class="stat"><div class="n">+25%</div><p>more teachers. Finding their school was easier, so colleagues finally joined in.</p></div>
+        <div class="stat"><div class="n">−50%</div><p>duplicate schools created during onboarding</p></div>
+        <div class="stat"><div class="n">9/10</div><p>users tested on the new dashboard rated the usability improvements very highly</p></div>
+      </div>
+      <p>One result looked bad at first: the kids' app score <strong>briefly dropped</strong>. Hundreds of comments later, the reason was clear. Children were complaining they couldn't just chat with friends and had to actually do some work. Exactly what teachers wanted.</p>
+      <h3>What I learned</h3>
+      <div class="cards3">
+        <div class="card"><h4>Lean UX struggles with big changes</h4><p>It worked brilliantly once the largest feature had shipped. For that, we used a hybrid with waterfall.</p></div>
+        <div class="card"><h4>No solution fits everyone</h4><p>Once you really know your users, you accept you can't please every one of them.</p></div>
+        <div class="card"><h4>Balance users and business</h4><p>A design can make people happy without making money. The job is to find both.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="calmac" aria-label="Why this is relevant to CalMac">
+    <div class="label">Why it matters for CalMac</div>
+    <div>
+      <h3>Many user groups, one service that has to just work.</h3>
+      <p>Sumdog meant designing for very different users at once, with very different confidence levels, and building a research practice where there wasn't one. CalMac's passengers range from islanders who travel every week to visitors booking their first crossing, and that's the same challenge.</p>
+    </div>
+  </aside>
+
+  <a href="#unity" class="next"><span><small>Next case study</small><b>Unity</b></span><span class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+</article>
+
+<!-- ================= UNITY ================= -->
+<article id="view-unity" class="wrap" hidden aria-labelledby="un-title">
+  <div class="cs-top">
+    <a href="#case-studies" class="back"><span aria-hidden="true">←</span> All case studies</a>
+    <div class="tags"><span class="tag hot">Complex design problem</span></div>
+    <h1 id="un-title">Unity: rebuilding A/B testing so teams could <span class="serif">trust it</span></h1>
+    <p class="cs-intro">A/B testing is how game studios improve their games, but almost none of the experiments on our platform ever went live. Users didn't trust the tool. I led the redesign that turned a technical, intimidating workflow into a guided one people felt confident using.</p>
+    <dl class="cs-meta">
+      <div><dt>Role</dt><dd>Lead Product Designer, managing 4 senior designers and 2 managers</dd></div>
+      <div><dt>Team</dt><dd>Designing across 3 product teams</dd></div>
+      <div><dt>Timeline</dt><dd>3 months</dd></div>
+      <div><dt>Tools</dt><dd>Figma, workshops, interviews, funnel analysis</dd></div>
+    </dl>
+  </div>
+
+  <div class="cs-hero un"><img src="img/86.jpg" alt="Redesigned A/B testing overview in Unity Gaming Services, showing players in tests, tests running and biggest improvements above a list of experiments"></div>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">01 · Background</div><h2>The context</h2></div>
+    <div class="prose">
+      <p>Unity helps people build, ship and make money from their games. <strong>More than 70% of mobile games</strong> are made with it.</p>
+      <p>A/B testing is the industry-standard way to improve player experience: testing a gameplay change or the best offer to maximise purchases. Without it, developers can't see the impact of their changes, which means guesswork, lost revenue and a poorer game.</p>
+      <p>Our A/B testing ran on <strong>DeltaDNA, an older platform Unity had acquired</strong>. We needed to bring it into the new Unity Gaming Services platform, and fix it on the way.</p>
+      <figure class="shot">
+        <div class="frame"><img src="img/unity-legacy.jpg" alt="The legacy DeltaDNA experiment setup: dense, stacked forms for trigger criteria and actions"></div>
+        <figcaption><b>The legacy tool.</b> Dense, stacked forms that assumed you already knew exactly what you were doing.</figcaption>
+      </figure>
+      <h3>Goals</h3>
+      <div class="cards2">
+        <div class="card"><h4>For users</h4><p>Easily turn a hypothesis into an accurate experiment, feel confident in the results, and act on anything significant.</p></div>
+        <div class="card"><h4>For the business</h4><p>Grow engaged projects, increase the number of live games using A/B tests, and market A/B testing as a product in its own right.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">02 · Process</div><h2>Discover, explore, ship</h2></div>
+    <div class="prose">
+      <p>I was part of the team bringing <strong>design thinking</strong> into Unity as design grew from 22 designers to almost 200. It's now part of how every team works, across product, design, engineering and marketing. This project followed it closely.</p>
+      <div class="flow">
+        <div class="card"><div class="ic" aria-hidden="true">1</div><h4>Discover</h4><p>Interviews to uncover issues, user data turned into trackable dashboards, and cross-department workshops.</p></div>
+        <div class="card"><div class="ic" aria-hidden="true">2</div><h4>Explore</h4><p>Wireframes tested with users, then iterated into hi-fi prototypes and tested again before going to leadership.</p></div>
+        <div class="card"><div class="ic" aria-hidden="true">3</div><h4>Ship</h4><p>Worked with engineers throughout, dog-fooded the product together, then measured success with user data.</p></div>
+      </div>
+
+      <h3>Discover: what the data told us</h3>
+      <p>We ran <strong>20+ user interviews</strong>, audited and built funnels for the existing experience, and paired them with live usage data to find where the journey broke.</p>
+      <div class="stats three">
+        <div class="stat light"><div class="n">79%</div><p>of tests never left draft mode. People weren't sure enough to take them further.</p></div>
+        <div class="stat light"><div class="n">6%</div><p>of tests actually made it live</p></div>
+        <div class="stat light"><div class="n">Trust</div><p>Users didn't trust the tooling or what it was telling them, and that lack of confidence showed.</p></div>
+      </div>
+      <div class="quotes">
+        <div class="quote">"Having actionable next steps would make our lives much easier."<small>Customer interview</small></div>
+        <div class="quote">"We'd love some guidance on how to run better tests!"<small>Customer interview</small></div>
+        <div class="quote">"We chose Firebase over Unity as your reporting wasn't clear enough."<small>Lost customer</small></div>
+      </div>
+      <div class="cards2">
+        <div class="card persona">
+          <div class="who"><span class="avatar" style="background:#1F6FD1" aria-hidden="true">M</span><div><b>Michael</b><span>Indie game developer</span></div></div>
+          <dl><dt>About</dt><dd>Small studio, many hats. Always runs 50/50 tests and guesses when he's got enough players.</dd>
+          <dt>Pain points</dt><dd>No idea whether results are significant. Wrong changes can kill engagement.</dd></dl>
+        </div>
+        <div class="card persona">
+          <div class="who"><span class="avatar" style="background:#1F8A70" aria-hidden="true">J</span><div><b>Joanna</b><span>Product / LiveOps manager</span></div></div>
+          <dl><dt>About</dt><dd>Mid-size studio, responsible for retention and in-app revenue. Wants multi-variant tests and easy reporting.</dd>
+          <dt>Pain points</dt><dd>Unsure of best practice, worried about launching a broken experiment, reporting too thin to act on.</dd></dl>
+        </div>
+      </div>
+
+      <h3>Explore: workshops and testing</h3>
+      <p>I ran several workshops with internal users who think like game developers, working out who the key personas were and how they'd ideally use the product. Those sessions shaped the user journey.</p>
+      <figure class="shot">
+        <div class="frame"><img src="img/76.jpg" alt="Workshop board covered in sticky notes grouping personas, problems and ideas"></div>
+        <figcaption><b>Cross-team workshops.</b> Mapping personas, pain points and the ideal journey.</figcaption>
+      </figure>
+      <p>We tested prototypes extensively with internal and external users who matched our personas, then logged the findings in an assumption matrix. We iterated after our v1 prototype, then got the following great results with v2:</p>
+      <div class="stats">
+        <div class="stat light"><div class="n">4.7/5</div><p>average ease-of-use score</p></div>
+        <div class="stat light"><div class="n">97%</div><p>overall task pass rate</p></div>
+        <div class="stat light"><div class="n">All</div><p>users said they felt more confident about what they were shipping</p></div>
+        <div class="stat light"><div class="n">v2</div><p>fixed every issue that appeared in v1</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">03 · Solution</div><h2>A guided path to a good test</h2></div>
+    <div class="prose">
+      <p>The core idea: <strong>break a complex technical setup into four clear steps</strong>, and give guidance at the moment people need it, so the tool helps you build a good experiment instead of letting you build a broken one.</p>
+      <figure class="shot">
+        <div class="frame"><img src="img/88.jpg" alt="Experiment setup step for choosing an audience, trigger, variants and goal, with a power analysis estimating 23 days to a reliable result"></div>
+        <figcaption><b>Built-in confidence.</b> As users choose their audience, variants and goal, a power analysis estimates how long the test needs to run and suggests how to get results faster.</figcaption>
+      </figure>
+      <div class="pair">
+        <figure class="shot">
+          <div class="frame"><img src="img/87.jpg" alt="Step one of creating an experiment: general details with a short welcome and link to best-practice guidance"></div>
+          <figcaption><b>1. General.</b> A short intro with best-practice guidance built in.</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img src="img/89.jpg" alt="Variants step showing the control group and three variants side by side"></div>
+          <figcaption><b>3. Variants.</b> Control and variants side by side, so differences are obvious.</figcaption>
+        </figure>
+      </div>
+      <figure class="shot">
+        <div class="frame"><img src="img/90.jpg" alt="Schedule step with start and end dates, options for what happens when the test ends, and a plain-English experiment summary"></div>
+        <figcaption><b>4. Schedule.</b> A plain-English summary of exactly what will happen, and what to do automatically when the test ends.</figcaption>
+      </figure>
+      <h3>Reporting people can act on</h3>
+      <p>Reporting was the other half of the trust problem. The new reports show test health, progress and time remaining at a glance, then let teams dig into retention and revenue by variant.</p>
+      <div class="pair">
+        <figure class="shot">
+          <div class="frame"><img src="img/91.jpg" alt="Test summary report showing test progression, test health, players in experiment and estimated time remaining"></div>
+          <figcaption><b>Test summary.</b> Is it healthy, and how long is left?</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img src="img/92.jpg" alt="Revenue report comparing control and variants over time on a line chart with a data table below"></div>
+          <figcaption><b>Results.</b> Variants compared over time, with an export.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">04 · Impact</div><h2>The results</h2></div>
+    <div class="prose">
+      <div class="stats three">
+        <div class="stat"><div class="n">55%</div><p>of tests made it live, up from just 6%</p></div>
+        <div class="stat"><div class="n">50M+</div><p>players taking part in experiments every week</p></div>
+        <div class="stat"><div class="n">570%</div><p>of our target hit. We probably should have aimed higher!</p></div>
+      </div>
+      <div class="quotes">
+        <div class="quote">"Easy to learn and understand the flow/system."<small>Customer feedback</small></div>
+        <div class="quote">"This works perfectly for our needs... the best in the market."<small>Customer feedback</small></div>
+        <div class="quote">"I absolutely love this product."<small>Customer feedback</small></div>
+      </div>
+      <h3>What I learned</h3>
+      <div class="cards3">
+        <div class="card"><h4>Don't always launch the MVP</h4><p>Sometimes it's worth waiting to launch something people love and feel comfortable using.</p></div>
+        <div class="card"><h4>Get user feedback early</h4><p>The data shocked us, and we were annoyed we hadn't analysed it sooner.</p></div>
+        <div class="card"><h4>Love your legacy products</h4><p>A product we thought might be dead in the water became hugely popular with users.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="calmac" aria-label="Why this is relevant to CalMac">
+    <div class="label">Why it matters for CalMac</div>
+    <div>
+      <h3>Complex systems, made simple, and trusted.</h3>
+      <p>This was about taking a technical process and making it feel simple and safe, then proving it with data. CalMac's role profile asks for the same: turning complex workflows into elegant experiences, whether that's booking vehicle space on a busy route or the tools crew rely on every day.</p>
+    </div>
+  </aside>
+
+  <a href="#stv" class="next"><span><small>Next case study</small><b>STV Player</b></span><span class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+</article>
+
+<!-- ================= STV ================= -->
+<article id="view-stv" class="wrap" hidden aria-labelledby="stv-title">
+  <div class="cs-top">
+    <a href="#case-studies" class="back"><span aria-hidden="true">←</span> All case studies</a>
+    <div class="tags"><span class="tag hot">Design &amp; research heavy</span></div>
+    <h1 id="stv-title">STV Player: helping viewers find something to watch, <span class="serif">faster</span></h1>
+    <p class="cs-intro">Viewers were struggling to find what was on, and many were leaving before they watched anything. I led the research to find out why, redesigned how live TV and the TV Guide work across web, mobile and connected TV, and tested every step with real users. Once it launched, we measured each change against a clear hypothesis, and all three were proven.</p>
+    <dl class="cs-meta">
+      <div><dt>Role</dt><dd>Lead Product Designer</dd></div>
+      <div><dt>Platforms</dt><dd>Web, mobile and connected TV</dd></div>
+      <div><dt>Research</dt><dd>11 interviews, 180+ users surveyed, 3 rounds of usability testing</dd></div>
+      <div><dt>Tools</dt><dd>Figma, interviews, surveys, impression testing, prototype testing, analytics</dd></div>
+    </dl>
+  </div>
+
+  <div class="cs-hero stv"><img src="img/stv-hero.jpg" alt="Redesigned STV Player TV Guide: an upcoming film featured at the top with its time and description, above a linear timeline of channels showing what's live now and next"></div>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">01 · Background</div><h2>The context</h2></div>
+    <div class="prose">
+      <p>STV Player is STV's streaming service, with live channels, catch-up and box sets across web, mobile and connected TV. It's a highly visible public brand, competing for attention with ITVX, Netflix and every other app on the TV.</p>
+      <p>Live TV is a core part of the service, but the experience we gave users wasn't holding up. We wanted to understand <strong>key viewer issues</strong>, from finding live shows on the TV Guide to changing the channel.</p>
+      <div class="cards2">
+        <div class="card"><h4>Business goal</h4><p>Get viewers in and keep them watching. Grow monthly active users and viewing by making it effortless to find something on.</p></div>
+        <div class="card"><h4>User goal</h4><p>Find something great to watch. "I don't want to spend 20 minutes finding a show. The service should be easy to use, and shows easy to find."</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">02 · Discovery</div><h2>Listening to viewers</h2></div>
+    <div class="prose">
+      <h3>Round one: a full review of the Player</h3>
+      <p>We started broad, with <strong>11 moderated interviews</strong> watching people sign up and find something to watch, and an <strong>impression survey of 110 users</strong> comparing our screens with competitors. It was a large study covering the entire Player, from sign-up and the homepage to playback and upgrading. It led to several streams of work.</p>
+      <p><strong>This case study focuses on one of them: the TV Guide and Live page redesign.</strong></p>
+      <p>We paired what we heard with the data, and the picture was clear:</p>
+      <div class="stats three">
+        <div class="stat light"><div class="n">86%</div><p>of people bounced from the TV Guide without watching anything</p></div>
+        <div class="stat light"><div class="n">49%</div><p>spent more than 15 seconds on the guide trying to find something</p></div>
+        <div class="stat light"><div class="n">90%</div><p>of participants had issues with the controls on the live and playback screens</p></div>
+      </div>
+      <p>The live screen left people guessing. Participants guessed <strong>five different meanings for just two icons</strong>, and our accessibility performed very poorly. Controls were unclear, and it wasn't obvious what else was on or how to switch to it.</p>
+      <div class="quotes">
+        <div class="quote">"Oooh I don't know... restart? But how long am I restarting?"<small>Interview participant, live screen</small></div>
+        <div class="quote">"I'm almost thinking now S might be a dollar to get me to subscribe."<small>Interview participant, live screen</small></div>
+        <div class="quote">"I thought this would allow me to rewind maybe 5 to 10 seconds."<small>Interview participant, live screen</small></div>
+      </div>
+
+      <h3>Round two: how people find live TV</h3>
+      <p>To go deeper on live, we ran a <strong>survey of 53 regular live TV viewers</strong>, <strong>impression testing with 18 participants</strong> comparing five TV guides, and pulled in sessions with <strong>15 sports fans</strong> from earlier focus groups.</p>
+      <div class="stats three">
+        <div class="stat light"><div class="n">96%</div><p>said an in-app TV guide is useful to them</p></div>
+        <div class="stat light"><div class="n">31%</div><p>don't plan ahead. They switch on and look for whatever's on.</p></div>
+        <div class="stat light"><div class="n">56%</div><p>use their TV first to find out what's on, even when another device is closer</p></div>
+      </div>
+      <p>Our guide actually scored well for <strong>the right level of information</strong>, on par with or better than competitors. So the job wasn't to add more. It was to make what we had far easier to scan and get around.</p>
+      <blockquote class="pull">"It takes ages to find which channel it's on. I'd love it if they just showed a schedule!"<small style="display:block;font-family:'Inter Tight',sans-serif;font-style:normal;font-size:14px;color:var(--ink-3);margin-top:10px">Focus group participant</small></blockquote>
+      <h3>What viewers need</h3>
+      <div class="cards3">
+        <div class="card"><div class="ic" aria-hidden="true">1</div><h4>Easy to find</h4><p>Live TV and the schedule should be one obvious step away, never buried.</p></div>
+        <div class="card"><div class="ic" aria-hidden="true">2</div><h4>See what's coming</h4><p>What's on now, next and later, clear at a glance.</p></div>
+        <div class="card"><div class="ic" aria-hidden="true">3</div><h4>Easy to flick</h4><p>Viewers aren't loyal to a channel. Switching has to be quick, without losing what you're watching.</p></div>
+      </div>
+      <p>From this we wrote three hypotheses we could measure after launch:</p>
+      <ul>
+        <li>"People aren't watching STV+1 because they can't find it on the Live page or TV Guide."</li>
+        <li>"High numbers of people leave the Player after not finding anything to watch on the TV Guide."</li>
+        <li>"People spend too long on the TV Guide because they can't navigate it effectively or find what to watch."</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">03 · Design &amp; testing</div><h2>Live TV, redesigned</h2></div>
+    <div class="prose">
+      <h3>A guide you can scan in seconds</h3>
+      <p>A <strong>linear TV Guide</strong> performed best in early testing. It shows what's live on every channel and what's coming up later that day. A dedicated live channels bar lets people jump straight into what's on, and selecting a show brings up richer detail without leaving the guide.</p>
+      <figure class="shot">
+        <div class="frame dark"><img src="img/stv-guide.jpg" alt="TV Guide with a row of live channel cards at the top showing what's on and time left, above a linear timeline of channels and upcoming shows"></div>
+        <figcaption><b>Live channels bar and linear guide.</b> Every live channel at a glance, with how long is left, and a timeline of what's on next.</figcaption>
+      </figure>
+      <div class="pair">
+        <figure class="shot">
+          <div class="frame dark"><img src="img/stv-player.jpg" alt="Live player showing a football match with a clear title, progress bar from start to end time, a Live badge and a Watch From Start button"></div>
+          <figcaption><b>A clearer live player.</b> What you're watching, how far through it is, and simple, labelled controls.</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame dark"><img src="img/stv-flick.jpg" alt="Live player with a row of other live channels raised at the bottom of the screen, each showing its programme and time left"></div>
+          <figcaption><b>Flick without leaving.</b> Other live channels slide up over the player, so switching never interrupts what's on.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Testing on the big screen</h3>
+      <p>We tested the prototypes on a real TV, <strong>using only the remote and with no hints</strong>, to see if people could find a live show, set a reminder and change channel.</p>
+      <div class="stats three">
+        <div class="stat"><div class="n">100%</div><p>pass rate on every task: finding a live show, setting a reminder and changing channel</p></div>
+        <div class="stat"><div class="n">4.9/5</div><p>average ease score for finding a live show and setting a reminder</p></div>
+        <div class="stat"><div class="n">5.5s</div><p>average time to find a live show</p></div>
+      </div>
+
+      <h3>Bringing it to mobile</h3>
+      <p>On mobile, we tested two directions for the Live channel list with 12 participants, across finding STV+1, switching to radio and finding what's on later.</p>
+      <figure class="shot">
+        <div class="frame dark"><img src="img/stv-m7.jpg" alt="Two mobile Live screens: Option A, a simple list of channels grouped by TV, Radio and Sports; Option B, richer cards with programme image, progress bar and what's on next"></div>
+        <figcaption><b>Option A vs Option B.</b> 75% preferred the richer Option B, with programme imagery, progress and what's on next.</figcaption>
+      </figure>
+      <div class="stats">
+        <div class="stat light"><div class="n">75%</div><p>preferred the richer Option B</p></div>
+        <div class="stat light"><div class="n">12/12</div><p>picked programme title as the most useful information</p></div>
+        <div class="stat light"><div class="n">92%</div><p>found what's on later using the Schedule</p></div>
+        <div class="stat light"><div class="n">6.3/7</div><p>average ease score</p></div>
+      </div>
+      <p>The results also showed where to improve: one participant <strong>completely missed Radio</strong>, and some people said they'd finished a task when they hadn't. So we strengthened the TV, Radio and Sports headings, kept programme title as the main thing to scan, and made Schedule more prominent.</p>
+
+      <h3>What launched on web</h3>
+      <div class="cards3">
+        <div class="card"><div class="ic" aria-hidden="true">1</div><h4>Live channels at a glance</h4><p>A Live Channels button shows every channel, with a preview of what's on and how long it has left.</p></div>
+        <div class="card"><div class="ic" aria-hidden="true">2</div><h4>A scannable TV Guide</h4><p>Clearer imagery, what's live now highlighted, and quick jumps to morning, afternoon or evening.</p></div>
+        <div class="card"><div class="ic" aria-hidden="true">3</div><h4>A clearer Live page</h4><p>Obvious what you're watching right now, and what's coming up next.</p></div>
+      </div>
+      <div class="tryit">
+        <p>Rather than showcase our images here, why don't you check out the live design and have a play around with it?</p>
+        <a href="https://player.stv.tv/schedule" target="_blank" rel="noopener" class="btn btn-primary">Try it out on desktop and your phone <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="side"><div class="step">04 · Impact</div><h2>The results</h2></div>
+    <div class="prose">
+      <p>After launch, we measured each hypothesis against the data. All three were proven.</p>
+
+      <div class="hyp">
+        <div class="k">Hypothesis 1 · STV+1 discoverability</div>
+        <div class="q">"People aren't watching STV+1 because they can't find it."</div>
+        <div class="ba" role="img" aria-label="Share of viewers watching STV+1: 3.6% before, 7.5% after">
+          <span>Before</span><div class="bar before"><i style="width:48%"></i></div><span class="v">3.6%</span>
+          <span>After</span><div class="bar after"><i style="width:100%"></i></div><span class="v">7.5%</span>
+        </div>
+        <p class="res"><b>More than doubled</b> the share of viewers watching STV+1, compared with a year of data before the change.</p>
+      </div>
+
+      <div class="hyp">
+        <div class="k">Hypothesis 2 · TV Guide drop-off</div>
+        <div class="q">"People are leaving after not finding anything to watch on the guide."</div>
+        <div class="ba" role="img" aria-label="TV Guide bounce rate: 86% before, 55% after">
+          <span>Before</span><div class="bar before"><i style="width:86%"></i></div><span class="v">86%</span>
+          <span>After</span><div class="bar after"><i style="width:55%"></i></div><span class="v">55%</span>
+        </div>
+        <p class="res">Bounce rate <b>down from 86% to 55%</b>, so 31% more guide visitors now go on to watch something instead of leaving the Player. This is a massive win for the business.</p>
+      </div>
+
+      <div class="hyp">
+        <div class="k">Hypothesis 3 · Time to find something</div>
+        <div class="q">"People spend too long on the guide because they can't navigate it."</div>
+        <div class="ba" role="img" aria-label="Users spending 15 seconds or less on the guide: 51% before, 85% after">
+          <span>Before</span><div class="bar before"><i style="width:51%"></i></div><span class="v">51%</span>
+          <span>After</span><div class="bar after"><i style="width:85%"></i></div><span class="v">85%</span>
+        </div>
+        <p class="res">People finding what they want in <b>15 seconds or less rose from 51% to 85%</b>. More people find something, and they find it faster.</p>
+      </div>
+
+      <h3>What I learned</h3>
+      <div class="cards3">
+        <div class="card"><h4>Keep what already works</h4><p>Our guide's information was rated as good as or better than competitors'. The fix was structure and clarity, not more content.</p></div>
+        <div class="card"><h4>Watch, don't just ask</h4><p>Some participants said they'd finished tasks they never completed. Watching what people actually do is what catches it.</p></div>
+        <div class="card"><h4>Design for every screen</h4><p>People check what's on with their TV, their phone and the app itself. The experience has to hold up on all of them.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="calmac" aria-label="Why this is relevant to CalMac">
+    <div class="label">Why it matters for CalMac</div>
+    <div>
+      <h3>A TV guide is a timetable.</h3>
+      <p>Making live, time-sensitive information easy to scan, on every device, for a public brand that has to be available around the clock, is very close to what CalMac passengers need from sailing times and service updates. And it was done the way the role profile describes: research first, test with real users, then measure with real data.</p>
+    </div>
+  </aside>
+
+  <a href="#case-studies" class="next"><span><small>Back to</small><b>All case studies</b></span><span class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+</article>
+
+<div class="wrap">
+  <footer>
+    <span>© 2026 Sam Dunbar Westwood</span>
+    <span>Hand-built for CalMac in HTML &amp; CSS, responsive and designed to WCAG 2.1 AA.</span>
+  </footer>
+</div>
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged image">
+  <button type="button" aria-label="Close">✕</button>
+  <img alt="">
+</div>
+
+<script>
+(function(){
+  var header=document.getElementById('top-bar');
+  var navLinks=[].slice.call(document.querySelectorAll('[data-nav]'));
+  var views={home:document.getElementById('view-home'),sumdog:document.getElementById('view-sumdog'),unity:document.getElementById('view-unity'),stv:document.getElementById('view-stv')};
+  var homeIds=['home','case-studies','contact'];
+  var current='home';
+
+  function setActive(id){
+    navLinks.forEach(function(a){
+      var on=a.getAttribute('data-nav')===id;
+      a.classList.toggle('active',on);
+      if(on) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current');
+    });
+  }
+  function route(){
+    var h=(location.hash||'#home').slice(1);
+    var view=(h==='sumdog'||h==='unity'||h==='stv')?h:'home';
+    var changed=view!==current;
+    Object.keys(views).forEach(function(k){views[k].hidden=(k!==view);});
+    current=view;
+    if(view==='home'){
+      var el=document.getElementById(homeIds.indexOf(h)>-1?h:'home');
+      if(h==='home'||!location.hash) window.scrollTo(0,0);
+      else if(el) el.scrollIntoView({behavior:changed?'auto':'smooth'});
+      onScroll();
+    } else {
+      window.scrollTo(0,0);
+      setActive('case-studies');
+      document.title=({sumdog:'Sumdog',unity:'Unity',stv:'STV Player'})[view]+' case study — Sam Dunbar Westwood';
+      var h1=views[view].querySelector('h1'); if(h1){h1.setAttribute('tabindex','-1');h1.focus({preventScroll:true});}
+      return;
+    }
+    document.title='Sam Dunbar Westwood — Portfolio for CalMac';
+  }
+  function onScroll(){
+    header.classList.toggle('scrolled',window.scrollY>8);
+    if(current!=='home') return;
+    var cur='home';
+    homeIds.forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=window.innerHeight*0.4)cur=id;});
+    if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4) cur='contact';
+    setActive(cur);
+  }
+  // Clicking the link for the hash you're already on should still scroll
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]'); if(!a) return;
+    if(a.getAttribute('href')===location.hash){e.preventDefault();route();}
+  });
+  window.addEventListener('hashchange',route);
+  window.addEventListener('scroll',onScroll,{passive:true});
+  route();
+
+  // Lightbox
+  var lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lastFocus=null;
+  function closeLb(){lb.hidden=true;document.body.style.overflow='';if(lastFocus)lastFocus.focus();}
+  [].slice.call(document.querySelectorAll('.shot img,.cs-hero img')).forEach(function(img){
+    img.setAttribute('tabindex','0'); img.setAttribute('role','button');
+    function open(){lastFocus=img;lbImg.src=img.src;lbImg.alt=img.alt;lb.hidden=false;document.body.style.overflow='hidden';lb.querySelector('button').focus();}
+    img.addEventListener('click',open);
+    img.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  });
+  lb.addEventListener('click',closeLb);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)closeLb();});
+})();
+</script>
+</body>
+</html>
